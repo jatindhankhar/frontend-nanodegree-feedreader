@@ -101,7 +101,7 @@ $(function () {
 
         it('Feeds are loaded properly', function (done) {
             let feeds = $('.feed .entry');
-            expect(feeds.length).not.toBe(0);
+            expect(feeds.length).toBeGreaterThan(0);
             done();
         });
     });
@@ -112,7 +112,7 @@ $(function () {
         beforeEach(function (done) {
             loadFeed(0, function () {
                 // Wait till old feed is loaded
-                oldFeed = $('.feed');
+                oldFeed = $('.feed .entry').text().trim();
                 // After that load new Feed
                 loadFeed(1, function () {
                     done();
@@ -124,7 +124,7 @@ $(function () {
          * Remember, loadFeed() is asynchronous.
          */
         it("Loading different feeds changes content", function (done) {
-            newFeed = $('.feed');
+            newFeed = $('.feed .entry').text().trim();
             expect(oldFeed).not.toBe(newFeed);
             done();
         });
